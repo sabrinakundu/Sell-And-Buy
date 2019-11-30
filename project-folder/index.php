@@ -41,17 +41,16 @@ li a:hover {
 </style>
 <body>
     <ul>
-    <li><a class="active" href="index.php">Home</a></li>
-    <li><a href="selleraccount.php">Seller Account</a></li>
-    <li><a href="cart.html">Cart</a></li>
-    <li><a href="existing_orders.html">Orders</a></li>
-    <li><a href="delivery_driver.html">Driver Account</a></li>
-    <li><a href="account.html">User Account</a></li>
+      <li><a class="active" href="index.php">Home</a></li>
+      <li><a href="selleraccount.php">Seller Account</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="existing_orders.html">Orders</a></li>
+      <li><a href="delivery_driver_acc.php">Driver Account</a></li>
+      <li><a href="account.html">User Account</a></li>
     </ul>
     <h1>
-    <p class="page_title">Sell or Buy</p>       
+    <p class="page_title">Sell or Buy</p>
     </h1>
     <p class="slogan">Ecommerce Making It Easier to Sell or Buy</p>
 </body>
 </html>
-
