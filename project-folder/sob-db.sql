@@ -27,23 +27,32 @@ insert into accounts (pass_word, email, street, city, state, zip, phone, first_n
 CREATE TABLE seller(
   user_id int not null primary key,
   seller_name varchar(30)not null,
-  email varchar(30) not null unique,
   foreign key(user_id) references accounts(user_id)
 );
 
 insert into seller(user_id, seller_name) values
   (1, 'Doe Company');
 
+CREATE TABLE person(
+  user_id int not null,
+  first_name varchar(30) not null,
+  last_name varchar(30) not null,
+  primary key(user_id),
+  foreign key(user_id) references accounts(user_id)
+);
+
+insert into person values
+  (1, 'John', 'Doe'),
+  (2, 'Sean', 'Dawn');
 
 CREATE TABLE driver(
   user_id int not null primary key,
-  email varchar(30) not null unique,
   first_name varchar(30) not null,
   last_name varchar(30) not null,
   license_num double(30,0) not null,
   insurance varchar(30) not null,
   deliver_zip double(5,0) not null,
-  foreign key(user_id) references accounts(user_id)
+  foreign key(user_id) references person(user_id)
 );
 
 CREATE TABLE customer(
@@ -95,6 +104,8 @@ CREATE TABLE delivers(
   actual_delivery_date varchar(30),
   foreign key(order_id) references orders(order_id)
 );
+
+
 -----------Need to be fixed, not in cloud yet---------------
 
 create type acc_status_type as TABLE
