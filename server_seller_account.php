@@ -33,14 +33,25 @@ if(isset($_POST['send'])) {
         array_push($errors, "This email address already has a seller account.");
     }
 
-    if(count($errors) == 0) {
-        $sql = "INSERT INTO seller (user_id, seller_name, email) VALUES (SELECT user_id FROM accounts WHERE email = `$email`, `$seller`, `$email`)";
-        if(mysqli_query($conn, $sql)) {
-            header("Location: sell.php");
-            exit;
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn); 
-        }
-        mysqli_close($conn);
+    $check_account_table = "SELECT * FROM accounts WHERE email = '$email'";
+    $res = mysqli_query($conn, $check_account_table);
+    $count_data = mysqli_num_rows($res);
+    if($count_data == 1) {
+        if(count($errors) == 0) {
+            $query = "SELECT user_id FROM accounts WHERE email = '$email'";
+            $results = mysqli_query($conn, $query);
+            $row = mysqli_fetch_row($results);
+            $user_id = $row[0];
+            $sql = "INSERT INTO seller (user_id, seller_name, email) VALUES ('$user_id', '$seller', '$email')";
+            if(mysqli_query($conn, $sql)) {
+                header("Location: sell.php");
+                exit;
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn); 
+            }
+            mysqli_close($conn);
+        }       
+    } else {
+        array_push($errors, "This email address does not belong to any registered user account. Please use your account's email address.");
     }
 }
