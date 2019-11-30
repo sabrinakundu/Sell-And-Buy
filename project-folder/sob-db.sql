@@ -26,6 +26,7 @@ insert into accounts (pass_word, email, street, city, state, zip, phone, first_n
 
 CREATE TABLE seller(
   user_id int not null primary key,
+  email varchar(30) not null unique,
   seller_name varchar(30)not null,
   foreign key(user_id) references accounts(user_id)
 );
@@ -47,6 +48,7 @@ insert into person values
 
 CREATE TABLE driver(
   user_id int not null primary key,
+  email varchar(30) not null unique,
   first_name varchar(30) not null,
   last_name varchar(30) not null,
   license_num double(30,0) not null,
