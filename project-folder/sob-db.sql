@@ -104,8 +104,6 @@ CREATE TABLE delivers(
   actual_delivery_date varchar(30),
   foreign key(order_id) references orders(order_id)
 );
-
-
 -----------Need to be fixed, not in cloud yet---------------
 
 create type acc_status_type as TABLE
