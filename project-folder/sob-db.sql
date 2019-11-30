@@ -33,17 +33,18 @@ CREATE TABLE seller(
 insert into seller(user_id, seller_name) values
   (1, 'Doe Company');
 
-CREATE TABLE person(
-  user_id int not null,
-  first_name varchar(30) not null,
-  last_name varchar(30) not null,
-  primary key(user_id),
-  foreign key(user_id) references accounts(user_id)
-);
 
-insert into person values
-  (1, 'John', 'Doe'),
-  (2, 'Sean', 'Dawn');
+-- CREATE TABLE person(
+--   user_id int not null,
+--   first_name varchar(30) not null,
+--   last_name varchar(30) not null,
+--   primary key(user_id),
+--   foreign key(user_id) references accounts(user_id)
+-- );
+
+-- insert into person values
+--   (1, 'John', 'Doe'),
+--   (2, 'Sean', 'Dawn');
 
 CREATE TABLE driver(
   user_id int not null primary key,
@@ -75,9 +76,22 @@ CREATE TABLE product(
   product_name varchar(30) not null,
   price double(30,2) not null,
   conditions varchar(30) not null,
+  quantity int not null,
   primary key(product_id),
   foreign key(user_id) references accounts(user_id)
 );
+
+delimiter //
+CREATE TRIGGER `trig_quantity_check` BEFORE INSERT ON `product`
+FOR EACH ROW
+BEGIN
+IF NEW.quantity < 0 THEN 
+SET NEW.quantity=0;
+END IF;
+END
+//
+delimiter;
+
 
 insert into product(user_id, product_name, price, conditions) values
   (1, 'Gray Sweater', 19.99, 'Brand New'),
@@ -86,14 +100,20 @@ insert into product(user_id, product_name, price, conditions) values
 CREATE TABLE orders(
   order_id int not null AUTO_INCREMENT,
   user_id int not null,
-  product_id int not null,
   order_date date not null,
   order_status varchar(30),
   schduled_delivery varchar(30),
   primary key(order_id, user_id, product_id),
   foreign key(user_id) references accounts(user_id),
-  foreign key(product_id) references product(product_id)
 );
+
+create table order_products(
+  order_id int not null,
+  product_id int not null,
+  primary key(order_id, product_id),
+  foreign key(order_id) REFERENCES orders(order_id),
+  foreign key(product_id) REFERENCES product(product_id),
+)
 
 insert into orders(user_id, product_id, order_date, order_status, schduled_delivery) values
   (2, 1, '2019-12-29', 'Preparing for shipping', '12/12');
@@ -104,8 +124,6 @@ CREATE TABLE delivers(
   actual_delivery_date varchar(30),
   foreign key(order_id) references orders(order_id)
 );
-
-
 -----------Need to be fixed, not in cloud yet---------------
 
 create type acc_status_type as TABLE
