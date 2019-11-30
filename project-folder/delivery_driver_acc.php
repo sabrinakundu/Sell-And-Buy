@@ -56,6 +56,8 @@ li a:hover {
         <form class="register-form" action="delivery_driver_acc.php" method="POST">
           <?php include('errors.php'); ?>
           <input type="text" name="email" placeholder="email"/>
+          <input type="text" name="first name" placeholder="first name"/>
+          <input type="text" name="last name" placeholder="last name"/>
           <input type="text" name="license number" placeholder="license number"/>
           <input type="text" name="insurance number" placeholder="insurance number"/>
           <input type="text" name="deliver zip" placeholder="deliver zip"/>
