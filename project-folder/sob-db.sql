@@ -1,28 +1,16 @@
-CREATE TABLE acc_status(
-  status_type varchar(30) not null,
-  primary key (status_type)
-);
-
-insert into acc_status values('Active');
-insert into acc_status values('Deactivated');
-
 CREATE TABLE accounts(
   user_id int not null AUTO_INCREMENT,
-  pass_word varchar(30) not null,
-  email varchar(30) not null,
-  street varchar(30) not null,
-  city varchar(30) not null,
-  state varchar(30) not null,
+  pass_word varchar(225) not null,
+  email varchar(225) not null,
+  street varchar(225) not null,
+  city varchar(225) not null,
+  state varchar(225) not null,
   zip double(5,0) not null,
   phone double(10,0) not null,
-  status_type varchar(30) not null,
+  status_type varchar(225) not null,
   primary key(user_id),
   foreign key (status_type) references acc_status(status_type)
 );
-
-insert into accounts (pass_word, email, street, city, state, zip, phone, first_name, last_name, status_type)values
-  ('johndoe', 'john@gmail.com', '12 John Rd', 'Richmond', 'VA', 23220, 8041234567, 'Active'),
-  ('sean', 'sean@gmail.com', '44 Sean Rd', 'Richmond', 'VA', 23220, 8042847593, 'Active');
 
 CREATE TABLE seller(
   user_id int not null primary key,
@@ -30,14 +18,6 @@ CREATE TABLE seller(
   seller_name varchar(30)not null,
   foreign key(user_id) references accounts(user_id)
 );
-
-insert into seller(user_id, seller_name) values
-  (1, 'Doe Company');
-
-
-insert into person values
-  (1, 'John', 'Doe'),
-  (2, 'Sean', 'Dawn');
 
 CREATE TABLE driver(
   user_id int not null primary key,
@@ -61,9 +41,6 @@ CREATE TABLE customer(
   foreign key(user_id) references accounts(user_id)
 );
 
-insert into customer values
-  (2, 'Sean', 'Dawn', 432543214, 'Sean Dawn', '11/21', 325);
-
 CREATE TABLE product(
   product_id int not null AUTO_INCREMENT,
   user_id int not null,
@@ -73,10 +50,6 @@ CREATE TABLE product(
   primary key(product_id),
   foreign key(user_id) references accounts(user_id)
 );
-
-insert into product(user_id, product_name, price, conditions) values
-  (1, 'Gray Sweater', 19.99, 'Brand New'),
-  (1, 'Green Blanket', 49.99, 'Used');
 
 CREATE TABLE orders(
   order_id int not null AUTO_INCREMENT,
@@ -99,9 +72,6 @@ CREATE TABLE orders_products(
   foreign key(order_id) references orders(order_id)
 )
 
-insert into orders(user_id, product_id, order_date, order_status, schduled_delivery) values
-  (2, 1, '2019-12-29', 'Preparing for shipping', '12/12');
-
 CREATE TABLE delivers(
   order_id int not null,
   user_id int not null,
@@ -111,29 +81,13 @@ CREATE TABLE delivers(
   foreign key(user_id) references driver(user_id)
 );
 
-
------------Need to be fixed, not in cloud yet---------------
-
-create type acc_status_type as TABLE
-(
-    status_type varchar(30) not null,
-    primary key (status_type)
-);
-
-create type user_status_type as TABLE
-(
-    status_type varchar(30) not null,
-    foreign key (status_type) references acc_status(status_type)
-);
-
-CREATE PROCEDURE acc_status_function
-(
-  @status_type acc_status_type,
-  @user_id user_status_type
-)
-AS
-Begin
-  update accounts
-  set status_type = @status_type
-  where user_id = @user_id
-End;
+delimiter //
+CREATE TRIGGER `trig_quantity_check` BEFORE INSERT ON `product`
+FOR EACH ROW
+BEGIN
+IF NEW.quantity < 0 THEN
+SET NEW.quantity=0;
+END IF;
+END
+//
+delimiter;
