@@ -44,7 +44,7 @@ if(isset($_POST['send'])) {
             $user_id = $row[0];
             $sql = "INSERT INTO seller (user_id, seller_name, email) VALUES ('$user_id', '$seller', '$email')";
             if(mysqli_query($conn, $sql)) {
-                header("Location: sell.php");
+                header("Location: sell.php?user_id=".$user_id);
                 exit;
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn); 

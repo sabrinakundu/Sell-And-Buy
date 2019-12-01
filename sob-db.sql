@@ -73,10 +73,11 @@ insert into customer values
 CREATE TABLE product(
   product_id int not null AUTO_INCREMENT,
   user_id int not null,
-  product_name varchar(30) not null,
+  product_name varchar(225) not null,
   price double(30,2) not null,
-  conditions varchar(30) not null,
+  conditions varchar(225) not null,
   quantity int not null,
+  seller varchar(225) not null,
   primary key(product_id),
   foreign key(user_id) references accounts(user_id)
 );
