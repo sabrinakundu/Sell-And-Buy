@@ -104,9 +104,11 @@ insert into orders(user_id, product_id, order_date, order_status, schduled_deliv
 
 CREATE TABLE delivers(
   order_id int not null,
+  user_id int not null,
   delivery_time double(4,0),
   actual_delivery_date varchar(30),
-  foreign key(order_id) references orders(order_id)
+  foreign key(order_id) references orders(order_id),
+  foreign key(user_id) references driver(user_id)
 );
 
 
