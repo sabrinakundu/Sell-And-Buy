@@ -43,6 +43,7 @@ li a:hover {
     </style>
     <body>
     <ul>
+      <li><b>Sell-Or-Buy</b></li>
       <li><a href="index.php">Home</a></li>
       <li><a class="active" href="selleraccount.php">Seller Account</a></li>
       <li><a href="cart.html">Cart</a></li>

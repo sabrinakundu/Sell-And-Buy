@@ -1,4 +1,4 @@
-<?php include(''); ?>
+<?php include('sever_driver.php'); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -43,6 +43,7 @@ li a:hover {
     </style>
     <body>
     <ul>
+      <li><b>Sell-Or-Buy</b></li>
     <li><a href="index.php">Home</a></li>
     <li><a href="selleraccount.php">Seller Account</a></li>
     <li><a href="cart.html">Cart</a></li>
@@ -56,6 +57,8 @@ li a:hover {
         <form class="register-form" action="delivery_driver_acc.php" method="POST">
           <?php include('errors.php'); ?>
           <input type="text" name="email" placeholder="email"/>
+          <input type="text" name="first name" placeholder="first name"/>
+          <input type="text" name="last name" placeholder="last name"/>
           <input type="text" name="license number" placeholder="license number"/>
           <input type="text" name="insurance number" placeholder="insurance number"/>
           <input type="text" name="deliver zip" placeholder="deliver zip"/>
