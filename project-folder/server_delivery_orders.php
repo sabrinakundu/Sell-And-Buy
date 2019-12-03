@@ -7,7 +7,6 @@
 .page_title, .slogan {
     font-size: 7;
 }
-
 p {
  text-align:center
 }
@@ -57,12 +56,10 @@ li a:hover {
     $user = "root";
     $password = "1234";
     $dbname = "sob";
-
     $conn = mysqli_connect($host, $user, $password, $dbname);
     if(!$conn) {
         die ('Could not connect to the database server' . mysqli_connect_error());
     }
-
     include 'server_driver.php'
     $driver_email = $email;
     $driver_user_id = "select user_id from accounts where '$driver_email' = accounts.email";
@@ -74,7 +71,6 @@ li a:hover {
                         on o.user_id = a.user_id
                         where d.user_id = '$query_driver_user_id'";
     $query = mysqli_query($conn, $get_deliver_info);
-
     while($row = mysqli_fetch_array($query)) {
       $street = $row['street'];
       $city = $row['city'];
@@ -100,7 +96,6 @@ li a:hover {
   $(.product_box).on("click", function() {
     $(".pop-overlay, .popup-content").addClass("active");
   });
-
   $(".close, .pop-overlay").on("click", function() {
     $(.popup-overlay, .popup-content).removeClass("active");
   })

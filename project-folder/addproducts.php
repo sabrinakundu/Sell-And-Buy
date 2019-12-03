@@ -56,7 +56,7 @@ if(isset($_POST['send'])) {
             header('Location: sell.php?user_id='.$query);
             exit;
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn); 
         }
         mysqli_close($conn);
     }

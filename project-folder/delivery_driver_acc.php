@@ -1,4 +1,4 @@
-<?php include('sever_driver.php'); ?>
+<?php include('server_driver.php'); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +9,6 @@
 .page_title, .slogan {
     font-size: 7;
 }
-
 p {
  text-align:center
 }
@@ -57,11 +56,11 @@ li a:hover {
         <form class="register-form" action="delivery_driver_acc.php" method="POST">
           <?php include('errors.php'); ?>
           <input type="text" name="email" placeholder="email"/>
-          <input type="text" name="first name" placeholder="first name"/>
-          <input type="text" name="last name" placeholder="last name"/>
-          <input type="text" name="license number" placeholder="license number"/>
-          <input type="text" name="insurance number" placeholder="insurance number"/>
-          <input type="text" name="deliver zip" placeholder="deliver zip"/>
+          <input type="text" name="firstname" placeholder="first name"/>
+          <input type="text" name="lastname" placeholder="last name"/>
+          <input type="text" name="licensenumber" placeholder="license number"/>
+          <input type="text" name="insurancenum" placeholder="insurance number"/>
+          <input type="text" name="deliverzip" placeholder="deliver zip"/>
           <button type="submit" name="send">Create Account</button>
         </form>
       </div>

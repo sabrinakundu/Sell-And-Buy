@@ -49,7 +49,7 @@ li a:hover {
     <li><a href="account.html">User Account</a></li>
     </ul>
     <h1>
-    <p class="page_title">Shop</p>
+    <p class="page_title">Shop</p>       
     </h1>
     <p class="slogan">Featured Items</p>
     <div class="popup-overlay">
@@ -60,7 +60,7 @@ li a:hover {
         <button class="close">Close</button>
       </div>
     </div>
-    <?php
+    <?php 
     $host = "35.192.209.221";
     $user = "root";
     $password = "1234";
@@ -134,3 +134,4 @@ li a:hover {
   }
 </style>
 </html>
+
