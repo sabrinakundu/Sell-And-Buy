@@ -51,6 +51,29 @@ li a:hover {
     <h1>
     <p class="page_title">Seller Products</p>
     </h1>
+    <table>
+  <tr>
+    <th>Product Name</th>
+    <th>Price</th>
+    <th>Condition</th>
+  </tr>
+  <tr>
+    <td>Sweater</td>
+    <td>19.99</td>
+    <td>New</td>
+  </tr>
+  <tr>
+    <td>Hammer</td>
+    <td>9.99</td>
+    <td>New</td>
+  </tr>
+  <tr>
+    <td>Gloves</td>
+    <td>4.00</td>
+    <td>Used</td>
+  </tr>
+
+</table>
     <?php
     $host = "35.192.209.221";
     $user = "root";
@@ -62,8 +85,8 @@ li a:hover {
         die ('Could not connect to the database server' . mysqli_connect_error());
     }
 
-    include 'server_seller_account.php'
-    $seller_user_id = $user_id
+    //include 'server_seller_account.php'
+    //$seller_user_id = $user_id
     $get_seller_products = "select * from product where user_id = $seller_user_id";
 
     $query = mysqli_query($conn, $get_seller_products);
@@ -84,6 +107,7 @@ li a:hover {
     }
 
     ?>
+
 </body>
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script>
@@ -96,6 +120,21 @@ li a:hover {
   })
 </script>
 <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
   .popup-overlay {
     visibility: hidden;
     position: absolute;

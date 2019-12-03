@@ -38,6 +38,22 @@ li b{
 li a:hover {
   background-color: #111;
 }
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
 </style>
 <body>
     <ul>
@@ -51,6 +67,8 @@ li a:hover {
     <h1>
     <p class="page_title">Shop</p>
     </h1>
+
+
     <p class="slogan">Featured Items</p>
     <div class="popup-overlay">
       <div class="popup-content">
@@ -60,6 +78,14 @@ li a:hover {
         <button class="close">Close</button>
       </div>
     </div>
+    <table align='center'>
+
+      <th>Product Name</th>
+      <th>Price</th>
+      <th>Condition</th>
+      <th>Quantity</th>
+
+
     <?php
     $host = "35.192.209.221";
     $user = "root";
@@ -78,18 +104,37 @@ li a:hover {
       $price = $row['price'];
       $conditions = $row['conditions'];
       $quantity = $row['quantity'];
-      echo "<div class='product_box'>
-          <div class='top_prod_box'>
-          <div class='center_prod_box'>
-            <div class='product_title'>$name</div>
-            <div class='product_price'>$$price</div>
-            <div class='product_conditions'>$conditions</div>
-            <div class='product_quantity'>$quantity</div>
-          </div>
-          </div>
-          </div>";
+      $g_product_id = $row['product_id'];
+      echo "
+
+          <tr>
+            <td class='product_title'>$name</td>
+            <td class='product_price'>$$price</td>
+            <td class='product_conditions'>$conditions</td>
+            <td class='product_quantity'>$quantity</td>
+            <input name='title' style='display:none;' value='<?php $name ?>' disabled/>
+            <input name='price' style='display:none;' value='<?php $price ?>' disabled/>
+            <input name='conditions' style='display:none;' value='<?php $conditions ?>' disabled/>
+            <input name='quantity' style='display:none;' value='<?php $quantity ?>' disabled/>
+            <td><button name='addToCart'>Click to add to cart</button></td>";
+            if(isset($_POST['addToCart'])) {
+              $get_name = mysqli_real_escape_string($conn, $_POST['title']);
+              $get_price = mysqli_real_escape_string($conn, $_POST['price']);
+              $get_conditions = mysqli_real_escape_string($conn, $_POST['conditions']);
+              $get_quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+              $sql_insert = 'insert into cart (user_id, product_id, quantity) values ($get_name, $get_price, $get_conditions, $get_quantity)';
+              if(mysqli_query($conn, $sql_insert)) {
+                echo 'Added to Cart';
+                header('Location: server_cart.php');
+              } else {
+                echo 'Error: ' . $sql_insert . '<br>' . mysqli_error($conn);
+              }
+            }
+            echo "<tr>";
+
     }
     ?>
+  </table>
 </body>
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script>

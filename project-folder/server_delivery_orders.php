@@ -38,6 +38,22 @@ li b{
 li a:hover {
   background-color: #111;
 }
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
 </style>
 <body>
     <ul>
@@ -52,6 +68,34 @@ li a:hover {
     <p class="page_title">Delivery Orders</p>
     </h1>
 
+    <table>
+  <tr>
+    <th>Street</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Schduled Delivery</th>
+  </tr>
+  <tr>
+    <td>123 W Broad St</td>
+    <td>Richmond</td>
+    <td>VA</td>
+    <td>12-13-19</td>
+  </tr>
+  <tr>
+    <td>55 Cary St</td>
+    <td>Richmond</td>
+    <td>VA</td>
+    <td>12-19-19</td>
+  </tr>
+  <tr>
+    <td>647 Main St</td>
+    <td>Richmond</td>
+    <td>VA</td>
+    <td>12-21-19</td>
+  </tr>
+
+</table>
+
     <?php
     $host = "35.192.209.221";
     $user = "root";
@@ -63,8 +107,8 @@ li a:hover {
         die ('Could not connect to the database server' . mysqli_connect_error());
     }
 
-    include 'server_driver.php'
-    $driver_email = $email;
+    //include 'server_driver.php'
+    //$driver_email = $email;
     $driver_user_id = "select user_id from accounts where '$driver_email' = accounts.email";
     $query_driver_user_id = mysqli_query($conn, $driver_user_id);
     //$get_order_id = "select order_id from delivers where user_id = $driver_user_id";

@@ -38,6 +38,22 @@ li b{
 li a:hover {
   background-color: #111;
 }
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
 </style>
 <body>
     <ul>
@@ -52,6 +68,34 @@ li a:hover {
     <p class="page_title">Existing Orders</p>
     </h1>
 
+    <table>
+  <tr>
+    <th>Order ID</th>
+    <th>Order Date</th>
+    <th>Order Status</th>
+    <th>Schduled Delivery</th>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>11-20-19</td>
+    <td>Not Delivered</td>
+    <td>12-13-19</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>11-25-19</td>
+    <td>Not Delivered</td>
+    <td>12-19-19</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>11-30-19</td>
+    <td>Not Delivered</td>
+    <td>12-21-19</td>
+  </tr>
+
+</table>
+
     <?php
     $host = "35.192.209.221";
     $user = "root";
@@ -63,8 +107,8 @@ li a:hover {
         die ('Could not connect to the database server' . mysqli_connect_error());
     }
 
-    include 'serverlogin.php'
-    $order_user_id = $user_id;
+    //include 'serverlogin.php'
+    //$order_user_id = $user_id;
     $get_orders = "Select * from orders where user_id = '$order_user_id '";
 
     $query = mysqli_query($conn, $get_orders);
@@ -89,7 +133,7 @@ li a:hover {
               <div class='quantity'>$quantity</div>
             </div>
             </div>
-            </div>"
+            </div>";
       }
       echo "<div class='product_box'>
           <div class='top_prod_box'>
@@ -100,7 +144,7 @@ li a:hover {
             <div class='schduled_delivery'>$schduled_delivery</div>
           </div>
           </div>
-          </div>"
+          </div>";
 
     }
     ?>

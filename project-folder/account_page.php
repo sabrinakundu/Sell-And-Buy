@@ -11,5 +11,5 @@
         die ('Could not connect to the database server' . mysqli_connect_error());
     }
 
-    if(isset("POST"))
+    //if(isset("POST"))
 ?>

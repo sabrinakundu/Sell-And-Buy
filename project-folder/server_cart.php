@@ -37,6 +37,21 @@ li b{
 li a:hover {
   background-color: #111;
 }
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
 </style>
 <body>
     <ul>
@@ -50,6 +65,30 @@ li a:hover {
     <h1>
     <p class="page_title">Cart</p>
     </h1>
+
+    <table>
+  <tr>
+    <th>Product Name</th>
+    <th>Price</th>
+    <th>Quantity</th>
+  </tr>
+  <tr>
+    <td>Sweater</td>
+    <td>19.99</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Hammer</td>
+    <td>9.99</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Gloves</td>
+    <td>4.00</td>
+    <td>1</td>
+  </tr>
+
+</table>
     <?php
     $host = "35.192.209.221";
     $user = "root";
@@ -59,17 +98,18 @@ li a:hover {
     if(!$conn) {
         die ('Could not connect to the database server' . mysqli_connect_error());
     }
-    include 'serverlogin.php'
-    $cart_user_id = $user_id;
+    //include 'serverlogin.php'
+    //$cart_user_id = $user_id;
     $get_cart = "select p.product_name, c.quantity, p.price, c.cart
                 from cart c join product p on c.product_id = p.product_id
                 where c.user_id = '$cart_user_id '";
     $query = mysqli_query($conn, $get_cart);
+
     while($row = mysqli_fetch_array($query)) {
       $product_name = $row['product_name'];
       $quantity = $row['quantity'];
       $price = $row['price'];
-      $product_id = $row['product_id']
+      $product_id = $row['product_id'];
       echo "<div class='product_box'>
           <div class='top_prod_box'>
           <div class='center_prod_box'>
@@ -82,27 +122,29 @@ li a:hover {
           </div>
           </div>
           </div>";
+
           //delete button query
           $delete = "delete from cart where user_id = $cart_user_id  and product_id = '$product_id'";
           if(isset($_POST['product_id'])) {
             $delete_query = mysqli_query($conn, $delete);
           }
     }
+
     //order button
     echo "<form class='register-form' action=server_orders.php' method='POST'>
     <button type='submit' name='order_button' value = '<?php '$product_id' ?>'>Delete Product</button>
-    </form>"
+    </form>";
     $date = new DateTime($input_date);
     $dateDelivery = $date->modify('+14 day');
     $order = "insert into orders(user_id, order_date, order_status, schduled_delivery)
-              values('$cart_user_id ', '$date', 'not delivered', '$dateDelivery')"
+              values('$cart_user_id ', '$date', 'not delivered', '$dateDelivery')";
     //Order button inserts products into order_products and deletes all products in the cart
     if(isset($_POST['order_button'])) {
       $order_query = mysqli_query($conn, $order);
       $display_cart_products = "select * from cart";
       while($rows = mysqli_fetch_array($display_cart_products)) {
         $order_products_user_id = $rows['user_id'];
-        $order_products_product_id $rows['product_id'];
+        $order_products_product_id = $rows['product_id'];
         $order_products_quantity = $rows['quantity'];
         $insert_order_products = "insert into order_products(user_id, product_id, quantity)
                                   values ('$order_products_user_id', '$order_products_product_id', '$order_products_quantity')";
