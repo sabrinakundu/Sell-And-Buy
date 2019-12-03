@@ -61,7 +61,7 @@ CREATE TABLE orders(
   foreign key(user_id) references accounts(user_id)
 );
 
-CREATE TABLE cart(
+CREATE TABLE order_products(
   order_id int not null,
   product_id int not null,
   quantity int not null,
@@ -69,6 +69,15 @@ CREATE TABLE cart(
   foreign key(product_id) references product(product_id),
   foreign key(order_id) references orders(order_id)
 )
+
+create table cart(
+user_id int not null
+product_id int not null,
+quantity int not null,
+primary key(user_id),
+foreign key(user_id) references accounts(user_id),
+foreign key(product_id) references product(product_id)
+);
 
 CREATE TABLE delivers(
   order_id int not null,
