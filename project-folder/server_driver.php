@@ -69,20 +69,6 @@ if(isset($_POST['send'])) {
             $user_id = $row[0];
             $sql = "INSERT INTO driver (user_id, email, first_name, last_name, license_num, insurance, deliver_zip) VALUES ('$user_id', '$email', '$firstname', '$lastname','$license','$insurance', '$deliverzip')";
             if(mysqli_query($conn, $sql)) {
-              $driver_user_id = "select user_id from driver where driver.email = '$email'";
-              $result = mysqli_query($conn, $driver_user_id);
-              $valid_zip = "Select a.user_id as 'user_id', o.zip as 'zip', o.order_id as 'order_id' from accounts a, orders o where o.user_id = a.user_id";
-              $valid_zip_query = mysqli_query($conn, $valid_zip);
-              while($rows = mysqli_fetch_array($valid_zip)){
-                if($rows['zip'] == $deliverzip){
-                  $matching_order_id = "select order_id from delivers where order_id = '$row['order_id']'";
-                  $query_matching_order_id = mysqli_query($conn, $matching_order_id);
-                  $count_matching_order_id = mysqli_num_rows($query_matching_order_id);
-                  if($count_matching_order_id == 0){
-                    $insert = "insert into delivers (order_id, user_id) values ('$rows['order_id']', '$rows['user_id']')";
-                  }
-                }
-              }
                 header("Location: deliver.php");
                 exit;
             } else {

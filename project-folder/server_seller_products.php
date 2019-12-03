@@ -62,7 +62,8 @@ li a:hover {
         die ('Could not connect to the database server' . mysqli_connect_error());
     }
 
-    $seller_user_id =
+    include 'server_seller_account.php'
+    $seller_user_id = $user_id
     $get_seller_products = "select * from product where user_id = $seller_user_id";
 
     $query = mysqli_query($conn, $get_seller_products);

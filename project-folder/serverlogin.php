@@ -11,6 +11,7 @@ if(!$conn) {
 
 $email = "";
 $pass_word = "";
+$user_id = "";
 $errors = array();
 
 if(isset($_POST['send'])) {
@@ -23,7 +24,7 @@ if(isset($_POST['send'])) {
         array_push($errors, "Password is required");
     } else if (isset($_POST['password'])) {
         $pass_word = $_POST['password'];
-        
+
     }
     $email = mysqli_real_escape_string($conn, $email);
     $pass_word = mysqli_real_escape_string($conn, $pass_word);
@@ -31,6 +32,7 @@ if(isset($_POST['send'])) {
         $query = "SELECT * FROM accounts WHERE email = '$email' AND pass_word='$pass_word'";
         $results = mysqli_query($conn, $query);
         if(mysqli_num_rows($results)) {
+            $user_id_query = "select user_id from accounts where email = '$email'";
             $_SESSION['email'] = $email;
             $_SESSION['success'] = "Logged in successfully";
             header("Location: index.php");
