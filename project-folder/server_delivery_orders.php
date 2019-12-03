@@ -7,6 +7,7 @@
 .page_title, .slogan {
     font-size: 7;
 }
+
 p {
  text-align:center
 }
@@ -40,12 +41,12 @@ li a:hover {
 </style>
 <body>
     <ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="selleraccount.php">Seller Account</a></li>
-    <li><a href="cart.html">Cart</a></li>
-    <li><a href="existing_orders.html">Orders</a></li>
-    <li><a class="active" href="delivery_driver.html">Driver Account</a></li>
-    <li><a href="account.html">User Account</a></li>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="selleraccount.php">Seller Account</a></li>
+      <li><a href="server_cart.php">Cart</a></li>
+      <li><a href="server_orders.php">Orders</a></li>
+      <li><a href="server_delivery_orders.php">Driver Account</a></li>
+      <li><a href="account.php">User Account</a></li>
     </ul>
     <h1>
     <p class="page_title">Delivery Orders</p>
@@ -56,10 +57,12 @@ li a:hover {
     $user = "root";
     $password = "1234";
     $dbname = "sob";
+
     $conn = mysqli_connect($host, $user, $password, $dbname);
     if(!$conn) {
         die ('Could not connect to the database server' . mysqli_connect_error());
     }
+
     include 'server_driver.php'
     $driver_email = $email;
     $driver_user_id = "select user_id from accounts where '$driver_email' = accounts.email";
@@ -71,6 +74,7 @@ li a:hover {
                         on o.user_id = a.user_id
                         where d.user_id = '$query_driver_user_id'";
     $query = mysqli_query($conn, $get_deliver_info);
+
     while($row = mysqli_fetch_array($query)) {
       $street = $row['street'];
       $city = $row['city'];
@@ -96,6 +100,7 @@ li a:hover {
   $(.product_box).on("click", function() {
     $(".pop-overlay, .popup-content").addClass("active");
   });
+
   $(".close, .pop-overlay").on("click", function() {
     $(.popup-overlay, .popup-content).removeClass("active");
   })

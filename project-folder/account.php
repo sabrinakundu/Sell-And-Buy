@@ -1,5 +1,5 @@
 <?php
-  include('account_page.php'); 
+  include('account_page.php');
   if(isset($_GET['user_id'])) {
     $user_id = $_GET['user_id'];
   }
@@ -12,10 +12,10 @@
     <li><b>Sell-Or-Buy</b></li>
     <li><a href="index.php">Home</a></li>
     <li><a href="selleraccount.php">Seller Account</a></li>
-    <li><a href="cart.html">Cart</a></li>
-    <li><a href="existing_orders.html">Orders</a></li>
-    <li><a href="delivery_driver_acc.php">Driver Account</a></li>
-    <li><a class="active" href="account.php">User Account</a></li>
+    <li><a href="server_cart.php">Cart</a></li>
+    <li><a href="server_orders.php">Orders</a></li>
+    <li><a href="server_delivery_orders.php">Driver Account</a></li>
+    <li><a href="account.php">User Account</a></li>
   </ul>
   <!-- Nav Bar -->
 
@@ -35,12 +35,12 @@
   <input type="text" name="expiration_date" placeholder="Expiration Date (MM/YY)" />
   <input type="text" name="security_code" placeholder="Security Code" />
   <button type="button" name="status_type">Deactivate</button>
-  <?php 
+  <?php
     $host = "35.192.209.221";
     $user = "root";
     $password = "1234";
     $dbname = "sob";
-    
+
     $conn = mysqli_connect($host, $user, $password, $dbname);
     if(!$conn) {
         die ('Could not connect to the database server' . mysqli_connect_error());
@@ -67,7 +67,7 @@
       mysqli_query($conn, $sql7);
       $sql8 = "DELETE FROM seller where user_id='$user_id'";
       mysqli_query($conn, $sql8);
-      
+
     }
   ?>
   <button type="submit" name="save">Save</button>
