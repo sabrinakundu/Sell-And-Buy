@@ -54,16 +54,14 @@ CREATE TABLE product(
 CREATE TABLE orders(
   order_id int not null AUTO_INCREMENT,
   user_id int not null,
-  product_id int not null,
   order_date date not null,
   order_status varchar(30),
   schduled_delivery varchar(30),
-  primary key(order_id, user_id, product_id),
-  foreign key(user_id) references accounts(user_id),
-  foreign key(product_id) references product(product_id)
+  primary key(order_id, user_id),
+  foreign key(user_id) references accounts(user_id)
 );
 
-CREATE TABLE orders_products(
+CREATE TABLE cart(
   order_id int not null,
   product_id int not null,
   quantity int not null,
