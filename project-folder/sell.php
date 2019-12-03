@@ -1,4 +1,4 @@
-<?php include('addproducts.php'); 
+<?php include('addproducts.php');
 if(isset($_GET['user_id'])) {
     $user_account = $_GET['user_id'];
 }
@@ -48,11 +48,12 @@ if(isset($_GET['user_id'])) {
     </style>
     <body>
     <ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="cart.html">Cart</a></li>
-    <li><a href="existing_orders.html">Orders</a></li>
-    <li><a href="delivery_driver.html">Driver Account</a></li>
-    <li><a href="account.html">User Account</a></li>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="selleraccount.php">Seller Account</a></li>
+      <li><a href="server_cart.php">Cart</a></li>
+      <li><a href="server_orders.php">Orders</a></li>
+      <li><a href="server_delivery_orders.php">Driver Account</a></li>
+      <li><a href="account.php">User Account</a></li>
     </ul>
     <div class="makemoney">
         <div class="form">
@@ -66,7 +67,7 @@ if(isset($_GET['user_id'])) {
                 <button type="submit" name="send">Post Item</button>
             </form>
         </div>
-        <?php 
+        <?php
             $host = "35.192.209.221";
             $user = "root";
             $password = "1234";
@@ -95,4 +96,4 @@ if(isset($_GET['user_id'])) {
         ?>
     </div>
     </body>
-</html> 
+</html>

@@ -41,12 +41,12 @@ li a:hover {
 </style>
 <body>
     <ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="selleraccount.php">Seller Account</a></li>
-    <li><a href="cart.html">Cart</a></li>
-    <li><a class="active" href="existing_orders.html">Orders</a></li>
-    <li><a href="delivery_driver.html">Driver Account</a></li>
-    <li><a href="account.html">User Account</a></li>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="selleraccount.php">Seller Account</a></li>
+      <li><a href="server_cart.php">Cart</a></li>
+      <li><a href="server_orders.php">Orders</a></li>
+      <li><a href="server_delivery_orders.php">Driver Account</a></li>
+      <li><a href="account.php">User Account</a></li>
     </ul>
     <h1>
     <p class="page_title">Existing Orders</p>
