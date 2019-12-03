@@ -63,8 +63,9 @@ li a:hover {
         die ('Could not connect to the database server' . mysqli_connect_error());
     }
 
-    $user_id =
-    $get_orders = "Select * from orders where user_id = '$user_id'";
+    include 'serverlogin.php'
+    $order_user_id = $user_id;
+    $get_orders = "Select * from orders where user_id = '$order_user_id '";
 
     $query = mysqli_query($conn, $get_orders);
     //displays all orders

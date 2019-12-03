@@ -64,7 +64,8 @@ li a:hover {
     }
 
     include 'server_driver.php'
-    $driver_user_id "select user_id from accounts where '$email' = accounts.email";
+    $driver_email = $email;
+    $driver_user_id = "select user_id from accounts where '$driver_email' = accounts.email";
     $query_driver_user_id = mysqli_query($conn, $driver_user_id);
     //$get_order_id = "select order_id from delivers where user_id = $driver_user_id";
     $get_deliver_info = "select a.street, a.city, a.zip, a.state, o.schduled_delivery

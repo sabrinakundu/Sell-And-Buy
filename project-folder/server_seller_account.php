@@ -36,6 +36,7 @@ if(isset($_POST['send'])) {
     $check_account_table = "SELECT * FROM accounts WHERE email = '$email'";
     $res = mysqli_query($conn, $check_account_table);
     $count_data = mysqli_num_rows($res);
+    $user_id;
     if($count_data == 1) {
         if(count($errors) == 0) {
             $query = "SELECT user_id FROM accounts WHERE email = '$email'";
